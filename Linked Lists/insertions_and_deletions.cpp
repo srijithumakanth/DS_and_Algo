@@ -81,6 +81,37 @@ void append(Node** head_ref, int new_data)
     return;
 }
 
+/* Given a reference (pointer to pointer) to the head of a list 
+   and a key, deletes the first occurrence of key in linked list */
+void deleteNode(Node** head_ref, int key)
+{
+    // Store the head node as temp
+    Node* temp = *head_ref, *prev;
+    // If head node itself holds the key to be deleted
+    if(temp != nullptr && temp->data == key)
+    {
+        *head_ref = temp->next; // Change head 
+        delete(temp); // Free the old memory
+        return;
+    }
+    // If head does not hold the key, then traverse through the list to find it
+    while(temp != nullptr && temp->data != key)
+    {
+        prev = temp; // keeping track of the previous node from he node to be deleted
+        temp = temp->next; 
+    }
+    // If no key is found in the linked-list
+    if(temp == nullptr) {return;}
+
+    // Unlink the node from the linked list
+    prev->next = temp->next;
+
+    // Delete the old node's memory
+    delete(temp);
+
+    return;
+}
+
 int main()
 {
     // allocate memory on the heap for 3 nodes
@@ -105,6 +136,7 @@ int main()
     push(&head, 4);
     insertAfter(second, 5);
     append(&head, 6);
+    deleteNode(&head, 4);
     printLinkedList(head);
 
     return 0;
