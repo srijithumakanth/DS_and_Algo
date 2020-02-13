@@ -112,6 +112,50 @@ void deleteNode(Node** head_ref, int key)
     return;
 }
 
+/* Given a reference (pointer to pointer) to the head of a list 
+   and a position, deletes the node at the given position */
+void deleteNodeAtPos(Node** head_ref, int position)
+{
+    /* Checks:  1. If the list is empty, 2 Position exceeds the no. of nodes in the list */
+
+    // Check 1: If the list is empty
+    if(*head_ref == nullptr){return;}
+
+    // (1). If the position is equal to the root node
+    // Store the head reference into a temp pointer variable
+    Node* temp = *head_ref;
+    if(position == 0)
+    {
+        // Change head
+        *head_ref = temp->next;
+        // Delete the temp node from the memory
+        delete(temp);
+        return;
+    }
+    
+    // (2). If the position is not zero, then traverse through the list to find the previous node of the node to be deleted
+    for (int i = 0; temp != nullptr && i < (position-1); i++)
+    {
+        temp = temp->next;
+    }
+    // Check 2: Position exceeds the no. of nodes in the list
+    if (temp == nullptr || temp->next == nullptr)
+    {
+        std::cout << "Position exceeds the number of nodes in the list.\n";
+        return;
+    }
+
+    // (3). Node (temp) is the previous node and Node (temp->next) is the node to be deleted
+    // Store the next of Node (temp->next) for the previous node to be updated with after (temp->next) is deleted
+    Node* next = temp->next->next;
+    
+    // Delete the node to be deleted (temp->next)
+    delete(temp->next);
+
+    // Unlink the deleted node from the linked list and update the next of the previous node to point to the next of the node jude deleted
+    temp->next = next; 
+}
+
 int main()
 {
     // allocate memory on the heap for 3 nodes
@@ -133,11 +177,12 @@ int main()
     third->data = 3;
     third->next = nullptr;
 
-    push(&head, 4);
-    insertAfter(second, 5);
-    append(&head, 6);
-    deleteNode(&head, 4);
-    printLinkedList(head);
+    push(&head, 4); // to the front of the list
+    insertAfter(second, 5); // Insert after a particular node
+    append(&head, 6); // To the end of the list
+    deleteNode(&head, 4); // Delete a particular node with the corresponsing key
+    deleteNodeAtPos(&head, 2);  // Delete a node at a particular position
+    printLinkedList(head); // Print akk the data in the linked-list
 
     return 0;
 }
