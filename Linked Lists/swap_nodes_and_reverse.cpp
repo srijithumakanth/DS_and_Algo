@@ -70,6 +70,24 @@ void swapNodes(Node **head_ref, int x, int y)
     currX->next = temp; 
 }  
   
+/* Function to reverse a List */
+void reverse(Node** head_ref)
+{
+    // Three pointers to keep track of while traverse through the list
+    Node* curr = *head_ref;
+    Node* prev = nullptr, *next = nullptr;
+
+    while (curr != nullptr)
+    {
+        next = curr->next; // Store the next of the current node
+        curr->next = prev; // Reverse the pointer of the current node to point to the previous node
+        prev = curr; // Move one step further
+        curr = next;
+    }
+    // After reversing the whole ist, update the head
+    *head_ref = prev;
+}
+
 /* Function to add a node at the beginning of List */
 void push(Node** head_ref, int new_data)  
 {  
@@ -112,13 +130,20 @@ int main()
     push(&start, 1);  
   
     cout << "Linked list before calling swapNodes(): " << endl;  
-    printList(start);  
+    printList(start);
+    cout << " " << endl;  
   
     swapNodes(&start, 1, 3);  
   
     cout << "\nLinked list after calling swapNodes(): " << endl;  
     printList(start);
     cout << " " << endl;   
-  
+    
+    reverse(&start);
+    
+    cout << "\nLinked list after calling reverse(): " << endl;  
+    printList(start);
+    cout << " " << endl;
+
     return 0;  
 }  
