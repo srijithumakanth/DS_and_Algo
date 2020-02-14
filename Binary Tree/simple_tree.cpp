@@ -64,4 +64,6 @@ int main()
    5           9    8 <-- leaf node
 */
 
+return 0;
+
 }
