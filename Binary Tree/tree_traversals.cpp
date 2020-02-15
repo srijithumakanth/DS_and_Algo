@@ -24,11 +24,34 @@ class Tree
 
 void printPreOrder(Tree* node)
 {
+    // Visit -- Left -- Right
     if (node != nullptr)
     {
         std::cout << node->data << " "; 
         printPreOrder(node->left);
         printPreOrder(node->right);
+    }
+}
+
+void printInOrder(Tree* node)
+{
+    // Left -- Visit -- Right
+    if (node != nullptr)
+    {
+        printInOrder(node->left);
+        std::cout << node->data << " ";
+        printInOrder(node->right);
+    }
+}
+
+void printPostOrder(Tree* node)
+{
+    // Left -- Right -- Visit
+    if (node != nullptr)
+    {
+        printPostOrder(node->left);
+        printPostOrder(node->right);
+        std::cout << node->data << " ";
     }
 }
 
@@ -73,7 +96,16 @@ int main()
    5           9    8 <-- leaf node
 */
 
+std::cout << "Pre-Order traversal: \n";
 printPreOrder(root);
+std::cout << std::endl;
+
+std::cout << "In-Order traversal: \n";
+printInOrder(root);
+std::cout << std::endl;
+
+std::cout << "Post-Order traversal: \n";
+printPostOrder(root);
 std::cout << std::endl;
 
 return 0;
