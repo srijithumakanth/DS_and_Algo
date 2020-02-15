@@ -1,17 +1,17 @@
 #include <iostream>
 
-class Node
+class Tree
 {
     public: 
         int data;
-        Node* left; // pointer to left child
-        Node* right; // pointer to right child
+        Tree* left; // pointer to left child
+        Tree* right; // pointer to right child
 
         // Function to add new node to the tree
-        Node* newNode(int newData)
+        Tree* newNode(int newData)
         {
             // Allocate a new node on the heap memory
-            Node* newNode = new Node();
+            Tree* newNode = new Tree();
             // Add the new Data onto the new node
             newNode->data = newData;
             // Initilize the left and right child as NULL
@@ -22,7 +22,7 @@ class Node
         }
 };
 
-void printPreOrder(Node* node)
+void printPreOrder(Tree* node)
 {
     if (node != nullptr)
     {
@@ -34,7 +34,7 @@ void printPreOrder(Node* node)
 
 int main()
 {
-    Node* root = root->newNode(10);
+    Tree* root = root->newNode(10);
     /* following is the tree after above statement  
   
        10    <-- root node
