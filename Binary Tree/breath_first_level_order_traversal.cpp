@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 
 class Tree
 {
@@ -22,36 +23,23 @@ class Tree
         }
 };
 
-void printPreOrder(Tree* node)
+void printLevelOrder(Tree* root)
 {
-    // Visit -- Left -- Right
-    if (node != nullptr)
-    {
-        std::cout << node->data << " "; 
-        printPreOrder(node->left);
-        printPreOrder(node->right);
-    }
-}
+    // To check if the tree is empty
+    if (root == nullptr){return;}
 
-void printInOrder(Tree* node)
-{
-    // Left -- Visit -- Right
-    if (node != nullptr)
-    {
-        printInOrder(node->left);
-        std::cout << node->data << " ";
-        printInOrder(node->right);
-    }
-}
+    // Level-Order traveral (breath-first) using FIFO Queue
+    std::queue<Tree* > q;
+    q.push(root);
 
-void printPostOrder(Tree* node)
-{
-    // Left -- Right -- Visit
-    if (node != nullptr)
+    while (!q.empty())
     {
-        printPostOrder(node->left);
-        printPostOrder(node->right);
+        Tree* node = q.front();
         std::cout << node->data << " ";
+        q.pop();
+
+        if (node->left != nullptr){q.push(node->left);}
+        if (node->right != nullptr){q.push(node->right);}
     }
 }
 
@@ -99,16 +87,8 @@ int main()
 
 /* ================================================================================================================= */
 
-std::cout << "Pre-Order traversal: \n";
-printPreOrder(root); // Expected O/P: 10 15 3 5 6 30 2 9 8
-std::cout << std::endl;
-
-std::cout << "In-Order traversal: \n";
-printInOrder(root); // Expected O/P: 5 3 15 6 10 30 9 2 8
-std::cout << std::endl;
-
-std::cout << "Post-Order traversal: \n";
-printPostOrder(root); // Expected O/P: 5 3 6 15 9 8 2 30 10
+std::cout << "Level-Order traversal: \n";
+printLevelOrder(root); // Expected O/P: 10 15 30 3 6 2 5 9 8 
 std::cout << std::endl;
 
 return 0;
