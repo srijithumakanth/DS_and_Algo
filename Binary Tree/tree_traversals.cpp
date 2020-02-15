@@ -22,6 +22,16 @@ class Node
         }
 };
 
+void printPreOrder(Node* node)
+{
+    if (node != nullptr)
+    {
+        std::cout << node->data << " "; 
+        printPreOrder(node->left);
+        printPreOrder(node->right);
+    }
+}
+
 int main()
 {
     Node* root = root->newNode(10);
@@ -62,6 +72,9 @@ int main()
     /           /  \
    5           9    8 <-- leaf node
 */
+
+printPreOrder(root);
+std::cout << std::endl;
 
 return 0;
 
