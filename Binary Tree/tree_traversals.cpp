@@ -96,6 +96,9 @@ int main()
    5           9    8 <-- leaf node
 */
 
+
+/* ================================================================================================================= */
+
 std::cout << "Pre-Order traversal: \n";
 printPreOrder(root);
 std::cout << std::endl;
