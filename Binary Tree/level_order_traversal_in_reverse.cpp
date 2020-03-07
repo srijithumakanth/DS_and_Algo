@@ -50,9 +50,6 @@ void Tree::levelOrderInReverse(Tree* root)
 	// To print contents of the stack (basically print the final result)
 	while(!s.empty())
 	{
-		// cout << " The level order traversal in reverse order is: \n";
-		// Tree* node = s.top();
-        // int dat
         cout << " " << s.top()->data;
 		s.pop();
 	}
