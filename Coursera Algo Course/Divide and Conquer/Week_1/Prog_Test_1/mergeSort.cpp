@@ -26,15 +26,19 @@ void merge(int low, int high) {
 	for (int i = low; i <= high; i++) {
 		if (j == firstVector.size()) {
 			inputVector[i] = secondVector[k];
+			// outputVector[i] = secondVector[k];
 			k++;
 		} else if (k == secondVector.size()) {
 			inputVector[i] = firstVector[j];
+			// outputVector[i] = firstVector[j];
 			j++;
 		} else if (firstVector[j] <= secondVector[k]) {
 			inputVector[i] = firstVector[j];
+			// outputVector[i] = firstVector[j];
 			j++;
 		} else {
 			inputVector[i] = secondVector[k];
+			// outputVector[i] = secondVector[k];
 			k++;
 		}
 	}
@@ -52,7 +56,11 @@ void createVector() {
 void displayInput() {
 	std::cout << "Input: ";
 	for (int i = 0; i < inputVector.size(); i++)
+	{
 		std::cout << inputVector[i] << " ";
+		// outputVector.push_back(inputVector[i]);
+	}
+	// outputVector = inputVector;
 	std::cout << std::endl << std::endl;
 }
 
@@ -62,10 +70,18 @@ void displayOutput() {
 		std::cout << inputVector[i] << " ";
 }
 
+// void displayOutput() {
+// 	std::cout << "Output: ";
+// 	for (int i = 0; i < outputVector.size(); i++)
+// 		std::cout << outputVector[i] << " ";
+// }
+
 int main() {
 	displayTitle();
 	createVector();
 	displayInput();
 	mergeSort(0, inputVector.size() - 1);
 	displayOutput();
+	// displayInput();
+
 }
