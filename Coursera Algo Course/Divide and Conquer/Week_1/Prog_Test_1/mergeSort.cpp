@@ -1,10 +1,41 @@
 #include <iostream>
 #include <vector>
+#include <string>
+#include <fstream>
 
 std::vector<int> inputVector;
+using std::string;
 
 void mergeSort(int low, int high);
 void merge(int low, int high);
+
+bool readInputFile(string fileName)
+{
+    // Open the File
+	std::ifstream stream(fileName.c_str());
+   
+    if (stream)
+    {
+        int count = 0;
+
+        while (stream >> count)
+        {
+            inputVector.push_back(count);
+            ++count;
+        }
+        
+        std::cout << "inputVector populated\n";
+        // Close the file
+        stream.close();
+        
+        return true;
+    }
+    else
+    {
+        std::cout << "Cannot open the File : "<<fileName<<std::endl;
+		return false;
+    }
+}
 
 void mergeSort(int low, int high) {
 	if (high > low) {
@@ -77,11 +108,17 @@ void displayOutput() {
 // }
 
 int main() {
-	displayTitle();
-	createVector();
+	// displayTitle();
+	// createVector();
 	displayInput();
-	mergeSort(0, inputVector.size() - 1);
-	displayOutput();
+	bool result = readInputFile("IntegerArray.txt");
+	if (result)
+	{
+		// displayInput();
+		mergeSort(0, inputVector.size() - 1);
+	}
+	// mergeSort(0, inputVector.size() - 1);
+	// displayOutput();
 	// displayInput();
 
 }

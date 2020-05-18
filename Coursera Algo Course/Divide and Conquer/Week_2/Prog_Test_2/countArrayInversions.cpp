@@ -1,22 +1,58 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <iomanip>
+#include <string>
 
 using std::vector;
+using std::string;
 
 class MergeSort
 {
     public:
         vector<int> inputVector;
+        size_t inversionCount = 0;
+
         void mergeSort(int low, int high);
         void merge(int low, int high);
         void displayInput();
         void displayOutput();
         void createVector(int num);
+        bool readInputFile(string fileName);
     
     private: 
         vector<int> outputVector;
          
 };
+
+bool MergeSort::readInputFile(string fileName)
+{
+    // Open the File
+	std::ifstream stream(fileName.c_str());
+   
+    if (stream)
+    {
+        int count = 0;
+
+        while (stream >> count)
+        {
+            inputVector.push_back(count);
+            ++count;
+        }
+        
+        std::cout << "inputVector populated\n";
+        // Close the file
+        stream.close();
+        
+        return true;
+    }
+    else
+    {
+        std::cout << "Cannot open the File : "<<fileName<<std::endl;
+		return false;
+    }
+}
+
 
 void MergeSort::mergeSort(int low, int high)
 {
@@ -68,6 +104,10 @@ void MergeSort::merge(int low, int high)
         {
             outputVector[i] = secondVector[k];
             k++;
+            for (int l = j; l <= firstVector.size() - 1; l++)
+            {
+                inversionCount++;
+            }
         }
         
     }
@@ -77,10 +117,10 @@ void MergeSort::displayInput()
 {
     std::cout << "Merge Sort" << std::endl << std::endl;
     std::cout << "Input: ";
-	for (int i = 0; i < inputVector.size(); i++)
-    {
-        std::cout << inputVector[i] << " ";
-    }
+	// for (int i = 0; i < inputVector.size(); i++)
+    // {
+    //     std::cout << inputVector[i] << " ";
+    // }
 
     // Initialize the O/P as I/P for manipulation by merge.
     outputVector = inputVector;
@@ -110,9 +150,19 @@ void MergeSort::createVector(int num)
 int main()
 {
     MergeSort m;
-    m.createVector(10);
-    m.displayInput();
-
-    m.mergeSort(0, m.inputVector.size() - 1);
-    m.displayOutput();
+    // m.createVector(10);
+    // bool result = m.readInputFile("IntegerArray.txt");
+    bool result = m.readInputFile("IntegerArray.txt");
+    if (result)
+    {
+        m.displayInput();
+        m.mergeSort(0, m.inputVector.size() - 1);
+        std::cout << "Inversion Count: " << m.inversionCount << std::endl;
+    }
+    else
+    {
+        std::cout << "Error reading file!\n";
+    }
+    
+    // m.displayOutput();
 }
