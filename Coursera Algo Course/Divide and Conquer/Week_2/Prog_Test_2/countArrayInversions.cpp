@@ -37,15 +37,12 @@ void MergeSort::merge(int low, int high)
     // Divide
     for (int i = low; i <= high; i++)
     {
-        // outputVector = inputVector;
         if (i <= (low + high) / 2)
         {
-            // firstVector.push_back(inputVector[i]);
             firstVector.push_back(outputVector[i]);
         }
         else
         {
-            // secondVector.push_back(inputVector[i]);
             secondVector.push_back(outputVector[i]);
         }   
     }
@@ -85,7 +82,7 @@ void MergeSort::displayInput()
         std::cout << inputVector[i] << " ";
     }
 
-    // Initialize the O/P as I/P for manipulationby merge.
+    // Initialize the O/P as I/P for manipulation by merge.
     outputVector = inputVector;
 	std::cout << std::endl << std::endl;
 }
